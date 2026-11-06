@@ -1,0 +1,903 @@
+/* Bloom — Week Project Settimana V
+   Reset minimale + tipografia di base. Da qui costruisci il layout.
+   LIGHT MODE
+colore generale testo: #1a1a1a
+colore generale sfondo: #fafafa
+colore border-bottom header: #eee
+TUTTI i verdi: hsl(150, 60%, 30%)
+box-shadow della header allo scroll: 0 4px 16px rgba(0, 0, 0, 0.15)
+hover sui link nella header: sfondo hsl(150, 60%, 95%), testo il verde precedente
+
+DARK MODE
+colore generale testo: #f0f0f0
+colore generale sfondo: #121212
+sfondo di TUTTE le card: #1f1f1f
+
+Tutti i colori che non ho indicato sono bianco o nero. */
+
+/* Reset */
+:root {
+  --green: hsl(150, 60%, 30%);
+  --green-soft: hsl(150, 60%, 95%);
+  --green-ring: hsl(150, 60%, 88%);
+  --green-bright: hsl(150, 60%, 60%);  /* solo per testi su sfondo scuro */
+
+  --text: #1a1a1a;
+  --bg: #fafafa;
+  --card: #fff;
+  --header-bg: #fff;
+  --line: #eee;
+  --card-line: rgba(0, 0, 0, 0.05);
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --muted: rgba(26, 26, 26, 0.72);
+
+  --heading: var(--green);
+  --role: var(--green);
+  --hover-bg: var(--green-soft);
+  --hover-text: var(--green);
+  --band: var(--green-soft);
+
+  --footer-bg: #000;
+  --footer-text: #fff;
+  --footer-logo: var(--green-bright);
+}
+
+/* ---------- Colori: tema scuro (attivato da script.js con data-theme) ---------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --text: #f0f0f0;
+  --bg: #121212;
+  --card: #1f1f1f;
+  --header-bg: #000;
+  --line: rgba(255, 255, 255, 0.12);
+  --card-line: rgba(255, 255, 255, 0.08);
+  --shadow: none;
+  --muted: rgba(240, 240, 240, 0.72);
+
+  --heading: var(--green-bright);
+  --role: rgba(240, 240, 240, 0.72);
+  --hover-bg: rgba(255, 255, 255, 0.1);
+  --hover-text: var(--green-bright);
+  --band: rgba(255, 255, 255, 0.05);
+
+  --footer-bg: #fff;
+  --footer-text: #000;
+  --footer-logo: var(--green);
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+/* con la modale aperta la pagina non scorre */
+body:has(.modal[open]) {
+  overflow: hidden;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--green-bright);
+  outline-offset: 2px;
+}
+
+.container {
+  width: calc(100% - 32px);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.25s;
+}
+
+/* Con la pagina scrollata (classe aggiunta da script.js): sfondo verde, tutto il resto bianco */
+.header-scrolled {
+  background: var(--green);
+  border-bottom-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.header-scrolled .logo {
+  color: #fff;
+}
+
+.header-scrolled nav a {
+  color: #fff;
+}
+
+.header-scrolled nav a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.header-scrolled .theme-toggle {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 0;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;  /* link e pulsante tema sulla stessa linea */
+  justify-content: center;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  list-style: none;
+}
+
+nav a {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--green);
+  background: var(--hover-bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.logo i {
+  font-size: 1.2rem;
+}
+
+.theme-toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.theme-toggle i {
+  font-size: 16px;
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: inline-block;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 64px 20px;
+  background: var(--green);
+  color: #fff;
+  text-align: center;
+}
+
+.hero-title {
+  margin-bottom: 14px;
+  font-size: clamp(1.6rem, 5.5vw, 4rem);
+  line-height: 1.15;
+}
+
+.hero-text {
+  max-width: 42ch;
+  margin-bottom: 26px;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--green);
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.btn-solid {
+  background: var(--green);
+  color: #fff;
+  box-shadow: none;
+}
+
+.open-modal {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+/* ---------- Sezioni e griglie ---------- */
+.section {
+  padding: 72px 0;
+}
+
+.section-band {
+  background: linear-gradient(180deg, var(--band), transparent 85%);
+}
+
+.section-title {
+  margin-bottom: 48px;
+  text-align: center;
+  color: var(--heading);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.card-info {
+  padding: 26px 22px;
+}
+
+.card-title {
+  margin: 14px 0 6px;
+  font-size: 1.15rem;
+}
+
+.card-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.card-info > i {
+  font-size: 42px;
+  color: var(--green);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.avatar-ring {
+  box-shadow: 0 0 0 4px var(--green-ring);
+}
+
+.role {
+  margin-bottom: 8px;
+  color: var(--role);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ---------- Lavori (mockup di un post) ---------- */
+.work {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 263 / 281;
+}
+
+.work-img {
+  width: 86%;
+  aspect-ratio: 1;
+  background: center / contain no-repeat;
+}
+
+.work-1 .work-img {
+  background-image: url(../img/works.png);
+}
+
+.work-2 .work-img {
+  background-image: url(../img/works.png);
+}
+
+.work-3 .work-img {
+  background-image: url(../img/works.png);
+}
+
+.work-4 .work-img {
+  background-image: url(../img/works.png);
+}
+
+.work-5 .work-img {
+  background-image: url(../img/works.png);
+}
+
+.work-6 .work-img {
+  background-image: url(../img/works.png);
+}
+
+.post {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  background: #fff;
+  color: #111;
+  font-size: 8px;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.post .icon {
+  width: 10px;
+  height: 10px;
+  color: #111;
+}
+
+.post-top {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.post-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4a7fc1;
+}
+
+.post-caption {
+  flex: 1;
+  padding-top: 4px;
+}
+
+.post-muted {
+  color: #777;
+}
+
+.post-tag {
+  color: #3b82c4;
+}
+
+.post-foot {
+  padding-top: 4px;
+  border-top: 1px solid #eee;
+}
+
+.post-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-icons-left {
+  display: flex;
+  gap: 3px;
+}
+
+.post-date {
+  display: block;
+  color: #777;
+  font-size: 7px;
+}
+
+.post-add {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid #eee;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* ---------- Recensioni (carosello) ---------- */
+.carousel {
+  display: flex;
+  gap: 24px;
+  padding: 8px 16px 24px;
+  overflow-x: auto;
+  scroll-padding: 0 16px;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.review {
+  flex: 0 0 clamp(230px, 36vw, 360px);
+  padding: 26px 22px;
+}
+
+.review .avatar {
+  width: 88px;
+  height: 88px;
+  font-size: 1.9rem;
+}
+
+.quote {
+  margin: 16px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.author {
+  font-size: 0.95rem;
+}
+
+.author-company {
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px));
+  background: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+.footer-inner {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+  text-align: center;
+}
+
+.footer-logo {
+  justify-content: center;
+  color: var(--footer-logo);
+}
+
+.footer-text {
+  margin-top: 2px;
+  font-size: 0.9rem;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #eee;
+  color: #1a1a1a;
+}
+
+.social-link i {
+  font-size: 18px;
+}
+
+.copyright {
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+
+/* ---------- Modale preventivo ---------- */
+.modal {
+  width: min(420px, 92vw);
+  padding: 26px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-title {
+  margin-bottom: 4px;
+  color: var(--heading);
+}
+
+.modal-sub {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal .btn {
+  margin-top: 16px;
+}
+
+/* dopo l'invio: si nasconde il form e compare il messaggio */
+.modal-done {
+  display: none;
+  padding: 14px 0;
+  text-align: center;
+}
+
+.modal.is-done .modal-form {
+  display: none;
+}
+
+.modal.is-done .modal-done {
+  display: block;
+}
+
+.label {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.field {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  font-weight: 400;
+}
+
+.field-area {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.field.is-invalid {
+  border-color: #d23c3c;
+}
+
+.error {
+  min-height: 1.2em;
+  margin-top: 3px;
+  color: #d23c3c;
+  font-size: 0.82rem;
+}
+
+/* ---------- Tablet (da 600px) ---------- */
+@media (min-width: 600px) {
+  .container {
+    width: calc(100% - 40px);
+  }
+
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 72px;
+    padding: 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* la terza card occupa tutta la riga */
+  .grid-odd > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr auto 1fr;
+    justify-items: stretch;
+    align-items: center;
+    text-align: left;
+  }
+
+  .footer-logo {
+    justify-content: flex-start;
+  }
+
+  .social {
+    justify-self: center;
+  }
+
+  .copyright {
+    text-align: right;
+  }
+}
+
+/* ---------- Desktop (da 900px) ---------- */
+@media (min-width: 900px) {
+  .header-inner {
+    height: 80px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .grid-odd > :last-child {
+    grid-column: auto;
+  }
+}
+
+/* ---------- Carosello allineato al contenitore su schermi molto larghi ---------- */
+@media (min-width: 1310px) {
+  .carousel {
+    padding-inline: calc((100% - 1270px) / 2);
+    scroll-padding-inline: calc((100% - 1270px) / 2);
+  }
+}
+
+/* ---------- Animazioni ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes modal-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+}
+
+/* 1. Al caricamento: header e hero compaiono uno dopo l'altro */
+.header {
+  animation: fade-down 0.6s ease backwards;
+}
+
+.hero-title {
+  animation: rise 0.8s ease backwards;
+}
+
+.hero-text {
+  animation: rise 0.8s 0.15s ease backwards;
+}
+
+.hero .open-modal {
+  animation: rise 0.8s 0.3s ease backwards;
+}
+
+/* 2. Cambio tema: i colori cambiano in modo morbido */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+  transition: box-shadow 0.25s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.logo {
+  transition: color 0.3s ease;
+}
+
+.footer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.section-title, .card-text, .quote {
+  transition: color 0.3s ease;
+}
+
+nav a {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle {
+  transition: border-color 0.3s ease;
+}
+
+/* 3. Hover: le card si alzano, i social diventano verdi */
+.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.social-link {
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+  }
+
+  :root[data-theme="dark"] .card:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+  }
+
+  .social-link:hover {
+    background: var(--green);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+}
+
+/* 4. Scorrendo: le card compaiono dal basso, una dopo l'altra (la classe .reveal la aggiunge script.js) */
+.reveal:not(.is-visible) {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: rise 0.7s ease backwards;
+  animation-delay: calc(var(--i, 0) * 120ms);
+}
+
+/* 5. Modale: si apre e si chiude con dissolvenza (la classe .is-closing la aggiunge script.js) */
+.modal[open] {
+  animation: modal-in 0.3s ease;
+}
+
+.modal[open]::backdrop {
+  animation: fade-in 0.3s ease;
+}
+
+.modal.is-closing {
+  animation: modal-out 0.25s ease forwards;
+}
+
+.modal.is-closing::backdrop {
+  animation: fade-out 0.25s ease forwards;
+}
+
+.modal.is-done .modal-done {
+  animation: fade-in 0.4s ease;
+}

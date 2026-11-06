@@ -1,34 +1,223 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloom — Studio di design</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
 
-    <header id="site-header">
-      <!-- Logo + nav -->
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bloom — Studio di design</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
 
-    <main>
+<body>
 
-      <section class="hero">
-        <!-- Titolo, sottotitolo, bottone CTA -->
-      </section>
+  <header id="mainHeader" class="header">
+    <!-- Logo + nav -->
+    <div class="container">
+      <div class="header-inner">
+        <span class="logo"><i class="fa-solid fa-seedling"></i>Bloom</span>
+        <nav>
+          <ul>
+            <li><a href="#servizi">Servizi</a></li>
+            <li><a href="#lavori">Lavori</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+            <li>
+              <button id="themeButton" class="theme-toggle" aria-label="Cambia tema">
+                <i class="fa-solid fa-moon icon-moon"></i>
+                <i class="fa-solid fa-sun icon-sun"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
-      <section class="services">
-        <!-- 3 card servizi: icona + titolo + descrizione -->
-      </section>
+  <main id="inizio">
 
-    </main>
+    <section class="hero">
+      <!-- Titolo, sottotitolo, bottone CTA -->
+      <h1 class="hero-title">Trasformiamo idee in design</h1>
+      <p class="hero-text">Siamo uno studio creativo. Identità visiva, web e motion graphic per chi vuole farsi notare.
+      </p>
+      <button class="btn open-modal">Richiedi preventivo</button>
+    </section>
 
-    <footer id="site-footer">
-      <!-- Logo, social icons, copyright -->
-    </footer>
 
-    <script src="script.js"></script>
-  </body>
+    <section id="lavori" class="section">
+      <div class="container">
+        <h2 class="section-title">I nostri lavori</h2>
+
+        <div class="grid">
+
+          <article class="card work work-1">
+            <div class="work-img"></div>
+          </article>
+
+          <article class="card work work-2">
+            <div class="work-img"></div>
+          </article>
+
+          <article class="card work work-3">
+            <div class="work-img"></div>
+          </article>
+
+          <article class="card work work-4">
+            <div class="work-img"></div>
+          </article>
+
+          <article class="card work work-5">
+            <div class="work-img"></div>
+          </article>
+
+          <article class="card work work-6">
+            <div class="work-img"></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="servizi" class="section">
+      <!-- 3 card servizi: icona + titolo + descrizione -->
+
+      <div class="container">
+        <h2 class="section-title">I nostri servizi</h2>
+        <div class="grid grid-odd">
+          <article class="card card-info">
+            <i class="fa-solid fa-pen-nib"></i>
+            <h3 class="card-title">Identità visiva</h3>
+            <p class="card-text">Logo, palette, tipografia e linee guida per un brand coerente, riconoscibile e
+              duraturo.</p>
+          </article>
+
+          <article class="card card-info">
+            <i class="fa-solid fa-desktop"></i>
+            <h3 class="card-title">Web design</h3>
+            <p class="card-text">Siti vetrina e landing page responsive, accessibili e ottimizzati per dispositivi
+              mobili.</p>
+          </article>
+
+          <article class="card card-info">
+            <i class="fa-solid fa-film"></i>
+            <h3 class="card-title">Motion graphic</h3>
+            <p class="card-text">Animazioni e brevi video per raccontare il prodotto, i social e le campagne
+              pubblicitarie.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="section section-band">
+      <!-- 3 card servizi: icona + titolo + descrizione -->
+      <div class="container">
+        <h2 class="section-title">Il nostro team</h2>
+        <div class="grid grid-odd">
+          <article class="card card-info">
+            <div class="avatar avatar-ring">GR</div>
+            <h3 class="card-title">Giulia Rossi</h3>
+            <p class="role">Art director</p>
+            <p class="card-text">Cura l’identità visiva dei progetti, dal concept alla consegna finale.</p>
+          </article>
+          <article class="card card-info">
+            <div class="avatar avatar-ring">MB</div>
+            <h3 class="card-title">Marco Bianchi</h3>
+            <p class="role">Web designer</p>
+            <p class="card-text">Progetta interfacce responsive e accessibili, con un occhio al codice.</p>
+          </article>
+          <article class="card card-info">
+            <div class="avatar avatar-ring">SV</div>
+            <h3 class="card-title">Sara Verdi</h3>
+            <p class="role">Motion designer</p>
+            <p class="card-text">Dà movimento ai brand con animazioni, video brevi e contenuti social.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Dicono di noi</h2>
+      <div id="reviewsCarousel" class="carousel">
+        <article class="card review">
+          <div class="avatar">LF</div>
+          <p class="quote">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo.</p>
+          <p class="author"><strong>Luca Ferrari</strong> <span class="author-company">— Ferrari Bike</span></p>
+        </article>
+        <article class="card review">
+          <div class="avatar">EC</div>
+          <p class="quote">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.</p>
+          <p class="author"><strong>Elena Conti</strong> <span class="author-company">— Studio Conti</span></p>
+        </article>
+        <article class="card review">
+          <div class="avatar">PG</div>
+          <p class="quote">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim.</p>
+          <p class="author"><strong>Paolo Gallo</strong> <span class="author-company">— Gallo Caffè</span></p>
+        </article>
+        <article class="card review">
+          <div class="avatar">FR</div>
+          <p class="quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+            labore.</p>
+          <p class="author"><strong>Fiorenza Russo</strong> <span class="author-company">— Russo Atelier</span></p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contatti" class="footer">
+    <!-- Logo, social icons, copyright -->
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="logo footer-logo"><i class="fa-solid fa-seedling"></i>Bloom</div>
+          <p class="footer-text">Studio di design fondato nel 2026.</p>
+        </div>
+        <div class="social">
+          <a class="social-link" href="#"><i class="fa-brands fa-instagram"></i><span
+              class="sr-only">Instagram</span></a>
+          <a class="social-link" href="#"><i class="fa-brands fa-linkedin-in"></i><span
+              class="sr-only">LinkedIn</span></a>
+          <a class="social-link" href="#"><i class="fa-brands fa-behance"></i><span
+              class="sr-only">Behance</span></a>
+        </div>
+        <div class="copyright">© 2026 Bloom</div>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="quoteModal" class="modal">
+    <button class="modal-close close-modal">×</button>
+    <div class="modal-form">
+      <h3 class="modal-title">Richiedi un preventivo</h3>
+      <p class="modal-sub">Raccontaci il tuo progetto. Ti rispondiamo entro 48 ore.</p>
+      <form id="quoteForm">
+        <label class="label">Nome <input id="nameInput" class="field"></label>
+        <p id="nameError" class="error"></p>
+        <label class="label">Email <input id="emailInput" class="field"></label>
+        <p id="emailError" class="error"></p>
+        <label class="label">Servizio
+          <select class="field">
+            <option>Identità visiva</option>
+            <option>Web design</option>
+            <option>Motion graphic</option>
+          </select>
+        </label>
+        <label class="label">Messaggio <textarea class="field field-area"></textarea></label>
+        <button class="btn btn-solid">Invia richiesta</button>
+      </form>
+    </div>
+    <div class="modal-done">
+      <h3 class="modal-title">Richiesta inviata</h3>
+      <p class="modal-sub">Grazie! Ti scriveremo all’indirizzo indicato entro 48 ore.</p>
+      <button class="btn btn-solid close-modal">Chiudi</button>
+    </div>
+  </dialog>
+
+  <script src="assets/js/script.js"></script>
+</body>
+
 </html>
